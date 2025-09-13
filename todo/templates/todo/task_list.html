@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My To-Do List</title>
+</head>
+<body>
+    <h1>Hello, {{ user.username }}!</h1>
+    <h2>Your Tasks</h2>
+    <p><a href="{% url 'add_task' %}">➕ Add New Task</a></p>
+
+    <ul>
+        {% for task in tasks %}
+            <li>
+                {% if task.completed %}
+                    ✅ <s>{{ task.title }}</s>
+                {% else %}
+                    ⏳ {{ task.title }}
+                    <a href="{% url 'complete_task' task.id %}">✔️ Mark as done</a>
+                {% endif %}
+                | <a href="{% url 'delete_task' task.id %}">🗑 Delete</a>
+            </li>
+        {% empty %}
+            <li>No tasks yet!</li>
+        {% endfor %}
+    </ul>
+    
+</body>
+</html>
